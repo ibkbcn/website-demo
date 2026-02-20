@@ -27,22 +27,44 @@
             border: 4px solid var(--primary); margin-bottom: 1.5rem;
         }
 
-        /* Grid de Habilidades */
+        /* --- SECCIÓN DE HABILIDADES CORREGIDA --- */
         .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Esto centra las tarjetas sobrantes */
             gap: 1.5rem;
+            margin-top: 2rem;
         }
+
         .skill-card {
-            background: white; padding: 1.5rem; border-radius: 15px;
-            border: 1px solid #e1e4e8; transition: 0.3s;
+            background: white; 
+            padding: 1.5rem; 
+            border-radius: 15px;
+            border: 1px solid #e1e4e8; 
+            transition: 0.3s;
+            /* Control de ancho para que queden 3 arriba y 2 abajo */
+            flex: 1 1 300px; 
+            max-width: 350px;
+            display: flex;
+            flex-direction: column;
         }
-        .skill-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+
+        .skill-card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--primary); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
         .skill-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--primary) !important; }
         .skill-card p { font-size: 0.9rem; margin: 0; }
 
-        /* Proyectos */
-        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        /* --- PROYECTOS --- */
+        .project-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 2rem; 
+            margin-top: 2rem; 
+        }
         .project-card { background: white; border-radius: 15px; overflow: hidden; border: 1px solid #eee; }
         .project-card img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; }
         .project-content { padding: 1.5rem; }
@@ -54,7 +76,9 @@
         }
         .lightbox img { max-width: 80%; max-height: 80%; border-radius: 10px; }
 
-        @media (max-width: 768px) { .project-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .skill-card { max-width: 100%; }
+        }
     </style>
 </head>
 <body>
