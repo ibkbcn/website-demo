@@ -3,215 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portafolio | Personal Landing Page</title>
-    
+    <title>Data Analyst Portfolio | [Tu Nombre]</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    
     <style>
-        /* CONFIGURACIÓN DE COLORES Y CONTRASTE */
         :root {
-            --primary-color: #1095c1;
+            --primary: #1095c1;
             --text-dark: #1a1a1a;
-            --bg-light: #f4f7f9;
+            --bg-light: #f8f9fa;
         }
+        body { background-color: var(--bg-light); padding: 1rem; color: #333; }
+        
+        h1, h2, h3 { color: var(--text-dark) !important; font-weight: 800 !important; }
+        h2 { border-bottom: 3px solid var(--primary); display: inline-block; margin-bottom: 2rem; }
 
-        body { 
-            padding: 1rem; 
-            background-color: var(--bg-light); 
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* TÍTULOS REFORZADOS */
-        h1, h2, h3 { 
-            color: var(--text-dark) !important; 
-            font-weight: 800 !important; 
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        h1 { font-size: 2.5rem; }
-        h2 { font-size: 2rem; border-bottom: 3px solid var(--primary-color); display: inline-block; margin-top: 2rem; }
-
-        /* SECCIÓN HERO (PRINCIPAL) */
         .hero { 
-            text-align: center; 
-            padding: 4rem 1rem; 
-            background-color: #ffffff; 
-            border: 1px solid #e1e4e8;
-            border-radius: 24px;
-            margin-bottom: 3rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center; padding: 4rem 1rem; background: white; 
+            border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 3rem; border: 1px solid #eee;
         }
-
+        
         .profile-pic {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1.5rem;
-            border: 5px solid var(--primary-color);
-            box-shadow: 0 5px 15px rgba(16, 149, 193, 0.3);
+            width: 130px; height: 130px; border-radius: 50%;
+            border: 4px solid var(--primary); margin-bottom: 1.5rem;
         }
 
-        /* TARJETAS DE PROYECTOS */
-        .project-grid {
+        /* Grid de Habilidades */
+        .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
         }
-
-        .project-card {
-            background: white;
-            padding: 0;
-            overflow: hidden;
-            border-radius: 18px;
-            border: 1px solid #ddd;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
+        .skill-card {
+            background: white; padding: 1.5rem; border-radius: 15px;
+            border: 1px solid #e1e4e8; transition: 0.3s;
         }
+        .skill-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .skill-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--primary) !important; }
+        .skill-card p { font-size: 0.9rem; margin: 0; }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border-color: var(--primary-color);
-        }
+        /* Proyectos */
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .project-card { background: white; border-radius: 15px; overflow: hidden; border: 1px solid #eee; }
+        .project-card img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; }
+        .project-content { padding: 1.5rem; }
 
-        .project-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            cursor: zoom-in;
-            transition: opacity 0.3s;
-        }
-
-        .project-card img:hover { opacity: 0.9; }
-
-        .project-info {
-            padding: 1.5rem;
-        }
-
-        .project-info h3 {
-            font-size: 1.4rem;
-            color: var(--primary-color) !important;
-        }
-
-        /* LIGHTBOX (IMAGEN EN GRANDE) */
+        /* Lightbox */
         .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.95);
-            justify-content: center;
-            align-items: center;
-            cursor: zoom-out;
+            display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
         }
+        .lightbox img { max-width: 80%; max-height: 80%; border-radius: 10px; }
 
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 85%;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
-        }
-
-        .close-button {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 50px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        footer { text-align: center; padding: 4rem 0 2rem; opacity: 0.8; }
-
-        /* Móvil ajustes */
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            body { padding: 0.5rem; }
-        }
+        @media (max-width: 768px) { .project-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <main class="container">
         <section class="hero">
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Mi Foto" class="profile-pic">
-            <h1>¡Hola! Soy [Tu Nombre] 👋</h1>
-            <p style="font-size: 1.2rem; color: #555;">Desarrollador enfocado en crear soluciones digitales modernas.</p>
-            <div style="margin-top: 1.5rem;">
-                <a href="mailto:tu-correo@ejemplo.com" role="button">Contáctame</a>
-                <a href="#proyectos" role="button" class="secondary outline">Mis Trabajos</a>
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Data" alt="Foto" class="profile-pic">
+            <h1>[Tu Nombre]</h1>
+            <p><strong>Data Analyst</strong> especializado en transformar datos crudos en decisiones estratégicas.</p>
+            <div>
+                <a href="mailto:tu-email@ejemplo.com" role="button">📩 Contactar</a>
+                <a href="https://github.com/tu-usuario" role="button" class="secondary outline">🐙 GitHub</a>
             </div>
         </section>
 
-        <section id="proyectos">
-            <center><h2>Mis Proyectos</h2></center>
-            
+        <section id="habilidades">
+            <center><h2>Habilidades Técnicas</h2></center>
+            <div class="skills-container">
+                <article class="skill-card">
+                    <h3>🛠️ Gestión y ETL</h3>
+                    <p>Extracción y manipulación de datos con <strong>SQL (PostgreSQL, BigQuery)</strong> y procesos automatizados de limpieza.</p>
+                </article>
+                <article class="skill-card">
+                    <h3>🐍 Programación Analítica</h3>
+                    <p>Análisis avanzado con <strong>Python y R</strong>, utilizando librerías como <strong>Pandas, NumPy y Tidyverse</strong>.</p>
+                </article>
+                <article class="skill-card">
+                    <h3>📊 Visualización y Storytelling</h3>
+                    <p>Comunicación de insights mediante <strong>Power BI, Tableau</strong> y librerías de código como <strong>Seaborn y Plotly</strong>.</p>
+                </article>
+                <article class="skill-card">
+                    <h3>📈 Estadística y ML</h3>
+                    <p>Aplicación de <strong>Pruebas de Hipótesis</strong> y modelos de <strong>Machine Learning</strong> (Regresión, Clustering y Series Temporales).</p>
+                </article>
+                <article class="skill-card">
+                    <h3>☁️ Entorno y Cloud</h3>
+                    <p>Arquitecturas en la nube <strong>(AWS/GCP)</strong> y control de versiones con <strong>Git/GitHub</strong> para entornos colaborativos.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="proyectos" style="margin-top: 4rem;">
+            <center><h2>Proyectos Destacados</h2></center>
             <div class="project-grid">
                 <article class="project-card">
-                    <img src="https://picsum.photos/id/1/600/400" alt="Proyecto 1" onclick="openLightbox(this.src)">
-                    <div class="project-info">
-                        <h3>Plataforma E-commerce</h3>
-                        <p>Tienda online con carrito de compras y pasarela de pagos integrada.</p>
-                        <a href="#" class="outline" role="button">Ver Detalles</a>
+                    <img src="https://picsum.photos/id/201/600/400" onclick="viewImg(this.src)">
+                    <div class="project-content">
+                        <h3>Análisis de Churn de Clientes</h3>
+                        <p>Identificación de patrones de abandono mediante Python y modelos de clasificación.</p>
+                        <a href="#" class="outline" role="button">Ver Proyecto</a>
                     </div>
                 </article>
-
                 <article class="project-card">
-                    <img src="https://picsum.photos/id/2/600/400" alt="Proyecto 2" onclick="openLightbox(this.src)">
-                    <div class="project-info">
-                        <h3>Dashboard Analítico</h3>
-                        <p>Panel de control con gráficos en tiempo real para visualización de datos.</p>
-                        <a href="#" class="outline" role="button">Ver Detalles</a>
+                    <img src="https://picsum.photos/id/180/600/400" onclick="viewImg(this.src)">
+                    <div class="project-content">
+                        <h3>Optimización de Inventarios</h3>
+                        <p>Dashboard interactivo en Power BI conectado a SQL para predecir demanda estacional.</p>
+                        <a href="#" class="outline" role="button">Ver Proyecto</a>
                     </div>
                 </article>
-            </div>
-        </section>
-
-        <section id="skills" style="margin-top: 4rem;">
-            <center><h2>Habilidades</h2></center>
-            <div class="grid" style="margin-top: 2rem;">
-                <div style="background: white; padding: 1.5rem; border-radius: 15px; border: 1px solid #ddd;">
-                    <h3 style="font-size: 1.2rem;">Frontend</h3>
-                    <p>HTML5, CSS3, JavaScript, React.</p>
-                </div>
-                <div style="background: white; padding: 1.5rem; border-radius: 15px; border: 1px solid #ddd;">
-                    <h3 style="font-size: 1.2rem;">Backend</h3>
-                    <p>Node.js, Python, PostgreSQL.</p>
-                </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>© 2026 - [Tu Nombre] | <a href="https://github.com/">GitHub</a></p>
+        <center><p>© 2026 | Analista de Datos | Hecho con GitHub Pages</p></center>
     </footer>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="close-button">&times;</span>
-        <img class="lightbox-content" id="lightbox-img">
+    <div id="lb" class="lightbox" onclick="this.style.display='none'">
+        <img id="lb-img">
     </div>
 
     <script>
-        function openLightbox(src) {
-            document.getElementById('lightbox').style.display = 'flex';
-            document.getElementById('lightbox-img').src = src;
+        function viewImg(s) {
+            document.getElementById('lb').style.display='flex';
+            document.getElementById('lb-img').src=s;
         }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-        }
-
-        // Cerrar con ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") closeLightbox();
-        });
     </script>
-
 </body>
 </html>
