@@ -27,38 +27,41 @@
             border: 4px solid var(--primary); margin-bottom: 1rem;
         }
 
-        /* --- SECCIÓN DE HABILIDADES COMPACTA Y CENTRADA --- */
+        /* --- SECCIÓN DE HABILIDADES CORREGIDA --- */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* Centra los elementos de la fila incompleta */
-            gap: 1rem; /* Espacio horizontal y vertical entre cuadros reducido */
+            justify-content: center; /* Centra los 2 cuadros de abajo */
+            gap: 1rem; /* Espacio reducido entre cuadros */
             max-width: 1100px;
-            margin: 0 auto; /* Centra el contenedor completo */
+            margin: 0 auto;
         }
 
         .skill-card {
             background: white; 
-            padding: 1.2rem; 
+            padding: 1.5rem; 
             border-radius: 15px;
             border: 1px solid #e1e4e8; 
             transition: 0.3s;
-            /* Forzamos a que entren 3 por fila en PC, pero permitimos que crezcan */
-            flex: 0 1 calc(33.333% - 1rem); 
+            flex: 0 1 calc(33.333% - 1rem); /* 3 por fila */
             min-width: 300px; 
+            
+            /* ESTO CORRIGE LA ALTURA DESIGUAL */
+            min-height: 220px; 
             display: flex;
             flex-direction: column;
-            margin-bottom: 0; /* Eliminamos márgenes extra para pegar las filas */
+            justify-content: flex-start;
+            margin-bottom: 0.5rem; 
         }
 
         .skill-card:hover { 
-            transform: translateY(-3px); 
+            transform: translateY(-5px); 
             border-color: var(--primary); 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
         }
 
-        .skill-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--primary) !important; }
-        .skill-card p { font-size: 0.85rem; margin: 0; line-height: 1.4; }
+        .skill-card h3 { font-size: 1.2rem; margin-bottom: 0.8rem; color: var(--primary) !important; }
+        .skill-card p { font-size: 0.95rem; margin: 0; line-height: 1.5; color: #666; }
 
         /* --- PROYECTOS --- */
         .project-grid { 
@@ -68,8 +71,8 @@
             margin-top: 1.5rem; 
         }
         .project-card { background: white; border-radius: 15px; overflow: hidden; border: 1px solid #eee; }
-        .project-card img { width: 100%; height: 180px; object-fit: cover; cursor: pointer; }
-        .project-content { padding: 1.2rem; }
+        .project-card img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; }
+        .project-content { padding: 1.5rem; }
 
         /* Lightbox */
         .lightbox {
@@ -78,12 +81,8 @@
         }
         .lightbox img { max-width: 85%; max-height: 85%; border-radius: 10px; }
 
-        @media (max-width: 950px) {
-            .skill-card { flex: 0 1 calc(50% - 1rem); } /* 2 por fila en tablets */
-        }
-        @media (max-width: 650px) {
-            .skill-card { flex: 1 1 100%; } /* 1 por fila en móvil */
-        }
+        @media (max-width: 950px) { .skill-card { flex: 0 1 calc(50% - 1rem); } }
+        @media (max-width: 650px) { .skill-card { flex: 1 1 100%; min-height: auto; } }
     </style>
 </head>
 <body>
@@ -92,7 +91,7 @@
         <section class="hero">
             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Data" alt="Foto" class="profile-pic">
             <h1>[Tu Nombre]</h1>
-            <p style="margin-bottom: 1rem;"><strong>Data Analyst</strong> especializado en transformar datos crudos en decisiones estratégicas.</p>
+            <p><strong>Data Analyst</strong> especializado en transformar datos crudos en decisiones estratégicas.</p>
             <div>
                 <a href="mailto:tu-email@ejemplo.com" role="button">📩 Contactar</a>
                 <a href="https://github.com/tu-usuario" role="button" class="secondary outline">🐙 GitHub</a>
@@ -121,27 +120,27 @@
                 </article>
                 <article class="skill-card">
                     <h3>☁️ Entorno y Cloud</h3>
-                    <p>Arquitecturas en la nube <strong>(AWS/GCP)</strong> y control de versiones con <strong>Git/GitHub</strong> para entornos colaborativos.</p>
+                    <p>Arquitecturas en la nube <strong>(AWS/GCP)</strong> y control de versiones con <strong>Git/GitHub</strong>.</p>
                 </article>
             </div>
         </section>
 
-        <section id="proyectos" style="margin-top: 3rem;">
+        <section id="proyectos" style="margin-top: 4rem;">
             <center><h2>Proyectos Destacados</h2></center>
             <div class="project-grid">
                 <article class="project-card">
                     <img src="https://picsum.photos/id/201/600/400" onclick="viewImg(this.src)">
                     <div class="project-content">
                         <h3>Análisis de Churn</h3>
-                        <p>Identificación de patrones de abandono mediante modelos de clasificación en Python.</p>
+                        <p>Modelado predictivo en Python para reducir la tasa de abandono de clientes.</p>
                         <a href="#" class="outline" role="button">Ver Proyecto</a>
                     </div>
                 </article>
                 <article class="project-card">
                     <img src="https://picsum.photos/id/180/600/400" onclick="viewImg(this.src)">
                     <div class="project-content">
-                        <h3>Optimización de Inventarios</h3>
-                        <p>Dashboard en Power BI conectado a SQL para predecir demanda estacional.</p>
+                        <h3>Optimización Logística</h3>
+                        <p>Dashboard de Power BI para el seguimiento de KPI's de transporte en tiempo real.</p>
                         <a href="#" class="outline" role="button">Ver Proyecto</a>
                     </div>
                 </article>
@@ -150,7 +149,7 @@
     </main>
 
     <footer>
-        <center><p style="padding: 2rem 0;">© 2026 | Analista de Datos | GitHub Pages</p></center>
+        <center><p style="padding: 2rem 0;">© 2026 | Data Analyst Portfolio | GitHub Pages</p></center>
     </footer>
 
     <div id="lb" class="lightbox" onclick="this.style.display='none'">
