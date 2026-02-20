@@ -14,70 +14,75 @@
         body { background-color: var(--bg-light); padding: 1rem; color: #333; }
         
         h1, h2, h3 { color: var(--text-dark) !important; font-weight: 800 !important; }
-        h2 { border-bottom: 3px solid var(--primary); display: inline-block; margin-bottom: 2rem; }
+        h2 { border-bottom: 3px solid var(--primary); display: inline-block; margin-bottom: 1.5rem; }
 
         .hero { 
-            text-align: center; padding: 4rem 1rem; background: white; 
+            text-align: center; padding: 3rem 1rem; background: white; 
             border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin-bottom: 3rem; border: 1px solid #eee;
+            margin-bottom: 2rem; border: 1px solid #eee;
         }
         
         .profile-pic {
-            width: 130px; height: 130px; border-radius: 50%;
-            border: 4px solid var(--primary); margin-bottom: 1.5rem;
+            width: 120px; height: 120px; border-radius: 50%;
+            border: 4px solid var(--primary); margin-bottom: 1rem;
         }
 
-        /* --- SECCIÓN DE HABILIDADES CORREGIDA --- */
+        /* --- SECCIÓN DE HABILIDADES COMPACTA Y CENTRADA --- */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* Esto centra las tarjetas sobrantes */
-            gap: 1.5rem;
-            margin-top: 2rem;
+            justify-content: center; /* Centra los elementos de la fila incompleta */
+            gap: 1rem; /* Espacio horizontal y vertical entre cuadros reducido */
+            max-width: 1100px;
+            margin: 0 auto; /* Centra el contenedor completo */
         }
 
         .skill-card {
             background: white; 
-            padding: 1.5rem; 
+            padding: 1.2rem; 
             border-radius: 15px;
             border: 1px solid #e1e4e8; 
             transition: 0.3s;
-            /* Control de ancho para que queden 3 arriba y 2 abajo */
-            flex: 1 1 300px; 
-            max-width: 350px;
+            /* Forzamos a que entren 3 por fila en PC, pero permitimos que crezcan */
+            flex: 0 1 calc(33.333% - 1rem); 
+            min-width: 300px; 
             display: flex;
             flex-direction: column;
+            margin-bottom: 0; /* Eliminamos márgenes extra para pegar las filas */
         }
 
         .skill-card:hover { 
-            transform: translateY(-5px); 
+            transform: translateY(-3px); 
             border-color: var(--primary); 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        .skill-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--primary) !important; }
-        .skill-card p { font-size: 0.9rem; margin: 0; }
+        .skill-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--primary) !important; }
+        .skill-card p { font-size: 0.85rem; margin: 0; line-height: 1.4; }
 
         /* --- PROYECTOS --- */
         .project-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-            gap: 2rem; 
-            margin-top: 2rem; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 1.5rem; 
+            margin-top: 1.5rem; 
         }
         .project-card { background: white; border-radius: 15px; overflow: hidden; border: 1px solid #eee; }
-        .project-card img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; }
-        .project-content { padding: 1.5rem; }
+        .project-card img { width: 100%; height: 180px; object-fit: cover; cursor: pointer; }
+        .project-content { padding: 1.2rem; }
 
         /* Lightbox */
         .lightbox {
             display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
         }
-        .lightbox img { max-width: 80%; max-height: 80%; border-radius: 10px; }
+        .lightbox img { max-width: 85%; max-height: 85%; border-radius: 10px; }
 
-        @media (max-width: 768px) {
-            .skill-card { max-width: 100%; }
+        @media (max-width: 950px) {
+            .skill-card { flex: 0 1 calc(50% - 1rem); } /* 2 por fila en tablets */
+        }
+        @media (max-width: 650px) {
+            .skill-card { flex: 1 1 100%; } /* 1 por fila en móvil */
         }
     </style>
 </head>
@@ -87,7 +92,7 @@
         <section class="hero">
             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Data" alt="Foto" class="profile-pic">
             <h1>[Tu Nombre]</h1>
-            <p><strong>Data Analyst</strong> especializado en transformar datos crudos en decisiones estratégicas.</p>
+            <p style="margin-bottom: 1rem;"><strong>Data Analyst</strong> especializado en transformar datos crudos en decisiones estratégicas.</p>
             <div>
                 <a href="mailto:tu-email@ejemplo.com" role="button">📩 Contactar</a>
                 <a href="https://github.com/tu-usuario" role="button" class="secondary outline">🐙 GitHub</a>
@@ -109,9 +114,10 @@
                     <h3>📊 Visualización y Storytelling</h3>
                     <p>Comunicación de insights mediante <strong>Power BI, Tableau</strong> y librerías de código como <strong>Seaborn y Plotly</strong>.</p>
                 </article>
+                
                 <article class="skill-card">
                     <h3>📈 Estadística y ML</h3>
-                    <p>Aplicación de <strong>Pruebas de Hipótesis</strong> y modelos de <strong>Machine Learning</strong> (Regresión, Clustering y Series Temporales).</p>
+                    <p>Aplicación de <strong>Pruebas de Hipótesis</strong> y modelos de <strong>Machine Learning</strong> (Regresión y Clustering).</p>
                 </article>
                 <article class="skill-card">
                     <h3>☁️ Entorno y Cloud</h3>
@@ -120,14 +126,14 @@
             </div>
         </section>
 
-        <section id="proyectos" style="margin-top: 4rem;">
+        <section id="proyectos" style="margin-top: 3rem;">
             <center><h2>Proyectos Destacados</h2></center>
             <div class="project-grid">
                 <article class="project-card">
                     <img src="https://picsum.photos/id/201/600/400" onclick="viewImg(this.src)">
                     <div class="project-content">
-                        <h3>Análisis de Churn de Clientes</h3>
-                        <p>Identificación de patrones de abandono mediante Python y modelos de clasificación.</p>
+                        <h3>Análisis de Churn</h3>
+                        <p>Identificación de patrones de abandono mediante modelos de clasificación en Python.</p>
                         <a href="#" class="outline" role="button">Ver Proyecto</a>
                     </div>
                 </article>
@@ -135,7 +141,7 @@
                     <img src="https://picsum.photos/id/180/600/400" onclick="viewImg(this.src)">
                     <div class="project-content">
                         <h3>Optimización de Inventarios</h3>
-                        <p>Dashboard interactivo en Power BI conectado a SQL para predecir demanda estacional.</p>
+                        <p>Dashboard en Power BI conectado a SQL para predecir demanda estacional.</p>
                         <a href="#" class="outline" role="button">Ver Proyecto</a>
                     </div>
                 </article>
@@ -144,7 +150,7 @@
     </main>
 
     <footer>
-        <center><p>© 2026 | Analista de Datos | Hecho con GitHub Pages</p></center>
+        <center><p style="padding: 2rem 0;">© 2026 | Analista de Datos | GitHub Pages</p></center>
     </footer>
 
     <div id="lb" class="lightbox" onclick="this.style.display='none'">
